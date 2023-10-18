@@ -1,0 +1,81 @@
+mysql> create database student;
+ERROR 1007 (HY000): Can't create database 'student'; database exists
+mysql> use student;
+Database changed
+mysql> drop table student;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table student(sno int primary key,name varchar(10),subject varchar(20),mark int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sno     | int         | NO   | PRI | NULL    |       |
+| name    | varchar(10) | YES  |     | NULL    |       |
+| subject | varchar(20) | YES  |     | NULL    |       |
+| mark    | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into student(sno,name,subject,mark) values(1,'somu','os',75),(2,'sankar','dbms',66),(3,'mahesh','mobilecomputing',92);
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++-----+--------+-----------------+------+
+| sno | name   | subject         | mark |
++-----+--------+-----------------+------+
+|   1 | somu   | os              |   75 |
+|   2 | sankar | dbms            |   66 |
+|   3 | mahesh | mobilecomputing |   92 |
++-----+--------+-----------------+------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student
+    -> add grade int;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sno     | int         | NO   | PRI | NULL    |       |
+| name    | varchar(10) | YES  |     | NULL    |       |
+| subject | varchar(20) | YES  |     | NULL    |       |
+| mark    | int         | YES  |     | NULL    |       |
+| grade   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table student
+    -> rename student to stu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to stu' at line 2
+mysql> alter table student
+    -> rename to stu;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| stu               |
++-------------------+
+1 row in set (0.03 sec)
+mysql> delete from stu
+    -> where sno=2;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from stu;
++-----+--------+-----------------+------+-------+
+| sno | name   | subject         | mark | grade |
++-----+--------+-----------------+------+-------+
+|   1 | somu   | os              |   75 |  NULL |
+|   3 | mahesh | mobilecomputing |   92 |  NULL |
++-----+--------+-----------------+------+-------+
+2 rows in set (0.00 sec)
+
+mysql> drop table stu;
+Query OK, 0 rows affected (0.02 sec)
