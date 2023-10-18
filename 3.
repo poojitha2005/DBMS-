@@ -1,0 +1,68 @@
+mysql> create database book;
+ERROR 1007 (HY000): Can't create database 'book'; database exists
+mysql> use book;
+Database changed
+mysql> create table book(sno int primary key,bname varchar(10),author varchar(10),price int,publisher varchar(10));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc book;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| sno       | int         | NO   | PRI | NULL    |       |
+| bname     | varchar(10) | YES  |     | NULL    |       |
+| author    | varchar(10) | YES  |     | NULL    |       |
+| price     | int         | YES  |     | NULL    |       |
+| publisher | varchar(10) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+
+mysql> insert into book(sno,bname,author,price,publisher) values(1,'dbms','seemakedha',250,'charulatha'),(2,'toc','johnmartin',400,'tatamcgrew'),(3,'c','balaguru',300,'technical');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from book;
++-----+-------+------------+-------+------------+
+| sno | bname | author     | price | publisher  |
++-----+-------+------------+-------+------------+
+|   1 | dbms  | seemakedha |   250 | charulatha |
+|   2 | toc   | johnmartin |   400 | tatamcgrew |
+|   3 | c     | balaguru   |   300 | technical  |
++-----+-------+------------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> selct 8 from book
+    -> where price>=300;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct 8 from book
+where price>=300' at line 1
+mysql> selct * from book
+    -> where price>=300;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct * from book
+where price>=300' at line 1
+mysql> select * from book
+    -> where price>=300;
++-----+-------+------------+-------+------------+
+| sno | bname | author     | price | publisher  |
++-----+-------+------------+-------+------------+
+|   2 | toc   | johnmartin |   400 | tatamcgrew |
+|   3 | c     | balaguru   |   300 | technical  |
++-----+-------+------------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into book(sno,bname,author,price,publisher) values(4,'c++','deep',200,'technical');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from book;
++-----+-------+------------+-------+------------+
+| sno | bname | author     | price | publisher  |
++-----+-------+------------+-------+------------+
+|   1 | dbms  | seemakedha |   250 | charulatha |
+|   2 | toc   | johnmartin |   400 | tatamcgrew |
+|   3 | c     | balaguru   |   300 | technical  |
+|   4 | c++   | deep       |   200 | technical  |
++-----+-------+------------+-------+------------+
+4 rows in set (0.00 sec)
+
+mysql> drop table book;
+Query OK, 0 rows affected (0.03 sec)
