@@ -1,0 +1,87 @@
+A.
+mysql> create database student;
+ERROR 1007 (HY000): Can't create database 'student'; database exists
+mysql> use student;
+Database changed
+mysql> create table student(regno int,name varchar(10),gender varchar(10),mobileno int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | YES  |     | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| gender   | varchar(10) | YES  |     | NULL    |       |
+| mobileno | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into student (regno,name,gender,mobileno) values (192210132,'poojitha','female',954765653),(192210084,'usha','female',64565756),(192210133,'deepika','female',676535467);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++-----------+----------+--------+-----------+
+| regno     | name     | gender | mobileno  |
++-----------+----------+--------+-----------+
+| 192210132 | poojitha | female | 954765653 |
+| 192210084 | usha     | female |  64565756 |
+| 192210133 | deepika  | female | 676535467 |
++-----------+----------+--------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select name ,gender,mobileno
+    -> from student
+    -> order by regno asc;
++----------+--------+-----------+
+| name     | gender | mobileno  |
++----------+--------+-----------+
+| usha     | female |  64565756 |
+| poojitha | female | 954765653 |
+| deepika  | female | 676535467 |
++----------+--------+-----------+
+3 rows in set (0.00 s
+
+
+B.
+
+create database faculty;
+ERROR 1007 (HY000): Can't create database 'faculty'; database exists
+mysql> use faculty;
+Database changed
+mysql> create table faculty(sno int,name varchar(10),gender varchar (10),hiredate int);
+Query OK, 0 rows affected (0.02 sec)
+mysql> insert into faculty (sno ,name,gender,hiredate) values (1,'somash','male',12-05-1994),(2,'raje ','famle',03-12-2001),(3,'sam','female',10-03-1995);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+mysql> select * from faculty;
++------+--------+--------+----------+
+| sno  | name   | gender | hiredate |
++------+--------+--------+----------+
+|    1 | somash | male   |    -1987 |
+|    2 | raje   | famle  |    -2010 |
+|    3 | sam    | female |    -1988 |
++------+--------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from faculty;
++------+--------+--------+----------+
+| sno  | name   | gender | hiredate |
++------+--------+--------+----------+
+|    1 | somash | male   |    -1987 |
+|    2 | raje   | famle  |    -2010 |
+|    3 | sam    | female |    -1988 |
++------+--------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from faculty
+    -> order by hiredate asc;
++------+--------+--------+----------+
+| sno  | name   | gender | hiredate |
++------+--------+--------+----------+
+|    2 | raje   | famle  |    -2010 |
+|    3 | sam    | female |    -1988 |
+|    1 | somash | male   |    -1987 |
++------+--------+--------+----------+
+3 rows in set (0.00 sec)
