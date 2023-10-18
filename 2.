@@ -1,0 +1,76 @@
+create database bank;
+ERROR 1007 (HY000): Can't create database 'bank'; database exists
+mysql> use bank;
+Database changed
+mysql> create table bank(sno int primary key,name varchar(10),accno int,balance int,custbranch varchar(10));
+ERROR 1050 (42S01): Table 'bank' already exists
+mysql> desc bank;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| sn0        | int         | NO   | PRI | NULL    |       |
+| name       | varchar(10) | YES  |     | NULL    |       |
+| accno      | int         | YES  |     | NULL    |       |
+| balance    | int         | YES  |     | NULL    |       |
+| custbranch | varchar(10) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> insert into bank(sn0,name,accno,balance,custbranch) values(2,'sam',12365,152500,'mylapore'),(3,'harish',12345,250000,'amasalai');
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from bank;
++-----+--------+-------+---------+------------+
+| sn0 | name   | accno | balance | custbranch |
++-----+--------+-------+---------+------------+
+|   1 | ramesh | 12378 |  100000 | adyar      |
+|   2 | sam    | 12365 |  152500 | mylapore   |
+|   3 | harish | 12345 |  250000 | amasalai   |
++-----+--------+-------+---------+------------+
+3 rows in set (0.05 sec)
+
+mysql> select * from bank
+    -> where name='ramesh';
++-----+--------+-------+---------+------------+
+| sn0 | name   | accno | balance | custbranch |
++-----+--------+-------+---------+------------+
+|   1 | ramesh | 12378 |  100000 | adyar      |
++-----+--------+-------+---------+------------+
+1 row in set (0.01 sec)
+
+mysql> select * from bank
+    -> where balance<200000;
++-----+--------+-------+---------+------------+
+| sn0 | name   | accno | balance | custbranch |
++-----+--------+-------+---------+------------+
+|   1 | ramesh | 12378 |  100000 | adyar      |
+|   2 | sam    | 12365 |  152500 | mylapore   |
++-----+--------+-------+---------+------------+
+2 rows in set (0.01 sec)
+
+mysql> select * from bank
+    -> where balance between 100000 and 200000;
++-----+--------+-------+---------+------------+
+| sn0 | name   | accno | balance | custbranch |
++-----+--------+-------+---------+------------+
+|   1 | ramesh | 12378 |  100000 | adyar      |
+|   2 | sam    | 12365 |  152500 | mylapore   |
++-----+--------+-------+---------+------------+
+2 rows in set (0.01 sec)
+
+mysql> update bank
+    -> set custbranch='poonamalle'
+    -> where sn0=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from bank;
++-----+--------+-------+---------+------------+
+| sn0 | name   | accno | balance | custbranch |
++-----+--------+-------+---------+------------+
+|   1 | ramesh | 12378 |  100000 | adyar      |
+|   2 | sam    | 12365 |  152500 | poonamalle |
+|   3 | harish | 12345 |  250000 | amasalai   |
++-----+--------+-------+---------+------------+
+3 rows in set (0.00 sec)
