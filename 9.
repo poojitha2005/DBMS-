@@ -1,0 +1,195 @@
+mysql>create database student;
+Query OK, 0 rows affected (0.02 sec)
+mysql>  create table student(sno int ,name varchar(10),score int);
+Query OK, 0 rows affected (0.02 sec)
+mysql> use student;
+Database changed
+mysql>  create table student(sno int ,name varchar(10),score int);
+ERROR 1050 (42S01): Table 'student' already exists
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sno   | int         | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into student (sno,name,score) values (1,'lally',34),(2,'mohi',23),(3,'jannu',56);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++------+-------+-------+
+| sno  | name  | score |
++------+-------+-------+
+|    1 | lally |    34 |
+|    2 | mohi  |    23 |
+|    3 | jannu |    56 |
++------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select name,score
+    -> from student
+    -> where score >(select max(score) from student);
+Empty set (0.00 sec)
+
+mysql> select *from student;
++------+-------+-------+
+| sno  | name  | score |
++------+-------+-------+
+|    1 | lally |    34 |
+|    2 | mohi  |    23 |
+|    3 | jannu |    56 |
++------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select name,score
+    -> from student
+    -> where score > 40;
++-------+-------+
+| name  | score |
++-------+-------+
+| jannu |    56 |
++-------+-------+
+1 row in set (0.00 sec)
+mysql> alter table student add assessment int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++------+-------+-------+------------+
+| sno  | name  | score | assessment |
++------+-------+-------+------------+
+|    1 | lally |    34 |       NULL |
+|    2 | mohi  |    23 |       NULL |
+|    3 | jannu |    56 |       NULL |
++------+-------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update student set assesment =2
+    -> where sno=1;
+ERROR 1054 (42S22): Unknown column 'assesment' in 'field list'
+mysql> update student set assessment =2
+    -> where sno=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set assessment =1
+    -> where sno=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set assessment =3
+    -> where sno=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  update student set assessment =5
+    -> where sno=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from student;
++------+-------+-------+------------+
+| sno  | name  | score | assessment |
++------+-------+-------+------------+
+|    1 | lally |    34 |          1 |
+|    2 | mohi  |    23 |          3 |
+|    3 | jannu |    56 |          5 |
++------+-------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select name
+    -> from student
+    -> where assessment >1;
++-------+
+| name  |
++-------+
+| mohi  |
+| jannu |
++-------+
+2 rows in set (0.00 sec)
+mysql>  alter table student add fac_name varchar(10);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql>  alter table student add fac_joindate int;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
++------+-------+-------+------------+----------+--------------+
+| sno  | name  | score | assessment | fac_name | fac_joindate |
++------+-------+-------+------------+----------+--------------+
+|    1 | lally |    34 |          1 | NULL     |         NULL |
+|    2 | mohi  |    23 |          3 | NULL     |         NULL |
+|    3 | jannu |    56 |          5 | NULL     |         NULL |
++------+-------+-------+------------+----------+--------------+
+3 rows in set (0.00 sec)
+mysql> update student
+    ->     -> set fac_name='rani'
+    ->  where sno=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> set fac_name='rani'
+ where sno=2' at line 2
+mysql> update student
+    -> set fac_name='sam'
+    ->  where sno=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> update student
+    -> set fac_name='sana'
+    ->  where sno=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from student;
++------+-------+-------+------------+----------+--------------+
+| sno  | name  | score | assessment | fac_name | fac_joindate |
++------+-------+-------+------------+----------+--------------+
+|    1 | lally |    34 |          1 | rani     |         NULL |
+|    2 | mohi  |    23 |          3 | sam      |         NULL |
+|    3 | jannu |    56 |          5 | sana     |         NULL |
++------+-------+-------+------------+----------+--------------+
+3 rows in set (0.00 sec)
+mysql> update student
+    -> set fac_joindate=2010;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from student;
++------+-------+-------+------------+----------+--------------+
+| sno  | name  | score | assessment | fac_name | fac_joindate |
++------+-------+-------+------------+----------+--------------+
+|    1 | lally |    34 |          1 | rani     |         2010 |
+|    2 | mohi  |    23 |          3 | sam      |         2010 |
+|    3 | jannu |    56 |          5 | sana     |         2010 |
++------+-------+-------+------------+----------+--------------+
+3 rows in set (0.00 sec)
+mysql> update student
+    -> set fac_joindate=2011
+    ->  where sno=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student
+    -> set fac_joindate=2021
+    ->  where sno=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+-------+-------+------------+----------+--------------+
+| sno  | name  | score | assessment | fac_name | fac_joindate |
++------+-------+-------+------------+----------+--------------+
+|    1 | lally |    34 |          1 | rani     |         2010 |
+|    2 | mohi  |    23 |          3 | sam      |         2011 |
+|    3 | jannu |    56 |          5 | sana     |         2021 |
++------+-------+-------+------------+----------+--------------+
+3 rows in set (0.00 sec)
+mysql> select fac_name,fac_joindate
+    ->  from student
+    -> where fac_joindate=(select max(fac_joindate)from student);
++----------+--------------+
+| fac_name | fac_joindate |
++----------+--------------+
+| sana     |         2021 |
++----------+--------------+
+1 row in set (0.00 sec)
