@@ -1,0 +1,113 @@
+A.
+mysql> create database student;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use student;
+Database changed
+mysql> create table student(regno int,name varchar(10),gender varchar(10),dob int,mobileno int,location varchar(10));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| regno    | int         | YES  |     | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| gender   | varchar(10) | YES  |     | NULL    |       |
+| dob      | int         | YES  |     | NULL    |       |
+| mobileno | int         | YES  |     | NULL    |       |
+| location | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+mysql> insert into student (regno,name,gender,dob,mobileno,location) values(19221234,'raju','male',12-3-2009,34356546,'nellore'),(1922334,'somu','male',22-5-2009,34354656,'chennai'),(19232343,'sam','female',24-6-2005,23432543,'bangalore');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++----------+------+--------+-------+----------+-----------+
+| regno    | name | gender | dob   | mobileno | location  |
++----------+------+--------+-------+----------+-----------+
+| 19221234 | raju | male   | -2000 | 34356546 | nellore   |
+|  1922334 | somu | male   | -1992 | 34354656 | chennai   |
+| 19232343 | sam  | female | -1987 | 23432543 | bangalore |
++----------+------+--------+-------+----------+-----------+
+3 rows in set (0.00 sec)
+
+B.
+create database faculty;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use faculty;
+Database changed
+mysql> create table faculty(facno int,facname varchar(10),gender char(1),dob date,doj date,mobileno int(10));
+Query OK, 0 rows affected, 1 warning (0.07 sec)
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | int         | YES  |     | NULL    |       |
+| facname  | varchar(10) | YES  |     | NULL    |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| doj      | date        | YES  |     | NULL    |       |
+| mobileno | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.03 sec)
+
+mysql> alter table faculty
+    -> modify dob int;
+Query OK, 0 rows affected (0.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table faculty
+    -> modify doj int;
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> insert into faculty(facno,facname,gender,dob,doj,mobileno) values(991,'anu','f',19,10,998929394),(222,'dass','m',19,09,823914596),(996,'sam',
+'f',02,18,895648958);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from faculty;
++-------+---------+--------+------+------+-----------+
+| facno | facname | gender | dob  | doj  | mobileno  |
++-------+---------+--------+------+------+-----------+
+|   991 | anu     | f      |   19 |   10 | 998929394 |
+|   222 | dass    | m      |   19 |    9 | 823914596 |
+|   996 | sam     | f      |    2 |   18 | 895648958 |
++-------+---------+--------+------+------+-----------+
+3 rows in set (0.00 sec)
+
+C.
+mysql>  create database department;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use department;
+Database changed
+mysql> create table department (deptno int,deptname varchar(10),depthead varchar(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| deptno   | int         | YES  |     | NULL    |       |
+| deptname | varchar(10) | YES  |     | NULL    |       |
+| depthead | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into department (deptno,deptname,depthead) values (23,'cse','sanjana'),(45,'eee','ram'),(67,'cse','sam');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from department;
++--------+----------+----------+
+| deptno | deptname | depthead |
++--------+----------+----------+
+|     23 | cse      | sanjana  |
+|     45 | eee      | ram      |
+|     67 | cse      | sam      |
++--------+----------+----------+
+3 rows in set (0.00 sec)
